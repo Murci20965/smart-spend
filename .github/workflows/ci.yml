@@ -1,0 +1,110 @@
+name: CI
+
+# Trigger CI on pushes or pull requests only to main and dev branches
+on:
+  push:
+    branches:
+      - main
+      - dev
+  pull_request:
+    branches:
+      - main
+      - dev
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    # Ephemeral service containers for Postgres and Redis for CI
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_HOST_AUTH_METHOD: trust  # CI only: no password needed
+          POSTGRES_DB: smart_spend
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d smart_spend"
+          --health-interval 10s --health-timeout 5s --health-retries 5
+
+      redis:
+        image: redis:7
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s --health-timeout 5s --health-retries 5
+
+    # Environment variables for CI; safe non-secret placeholders
+    env:
+      DATABASE_URL: postgresql+asyncpg://postgres@postgres:5432/smart_spend
+      REDIS_HOST: redis
+      REDIS_PASSWORD: ""
+      SECRET_KEY: dev-secret        # CI secret placeholder; do not use in prod
+      ENV: test
+
+    steps:
+      # Step 1: Checkout repository code
+      - name: Checkout
+        uses: actions/checkout@v4
+        # Security: ensures we only use code from the PR or push
+
+      # Step 2: Set up Python environment
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+        # Security: pinned version ensures consistent environment
+
+      # Step 3: Install system dependencies
+      - name: Install system deps
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y postgresql-client
+        # Needed for database readiness checks
+
+      # Step 4: Install Python dependencies
+      - name: Install Python deps
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r smart-spend-backend/requirements.txt
+        # Security: only installs pinned dependencies from requirements.txt
+
+      # Step 5: Wait for Postgres service to be ready
+      - name: Wait for Postgres to be ready
+        run: |
+          for i in $(seq 1 60); do
+            pg_isready -h postgres -p 5432 -U postgres -d smart_spend && break || sleep 1
+          done
+        # Security: ensures migration scripts only run after DB is ready
+
+      # Step 6: Run Alembic database migrations
+      - name: Run migrations
+        working-directory: ./smart-spend-backend
+        run: |
+          alembic upgrade head
+        # Security: migrations run in CI with ephemeral DB; avoids leaking prod DB info
+
+      # Step 7: Run code quality checks
+      - name: Run code formatters and linters
+        working-directory: ./smart-spend-backend
+        run: |
+          black --check .
+          isort --check-only .
+          flake8 --max-line-length=88
+        # Ensures code style is enforced before merging; security: avoids malicious code formatting
+
+      # Step 8: Run unit & integration tests
+      - name: Run tests
+        working-directory: ./smart-spend-backend
+        run: |
+          pytest -q --cov=app --cov-report=xml
+        # Security: tests run in ephemeral environment; ensures app logic is safe and functional
+
+      # Step 9: Tear down
+      - name: Tear down (no-op for services)
+        if: always()
+        run: echo "Services are torn down automatically by GitHub Actions"
+        # Security: CI services are ephemeral; secrets not persisted

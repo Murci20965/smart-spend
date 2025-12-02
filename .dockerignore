@@ -1,0 +1,72 @@
+# -------------------------------------------
+# IGNORE EVERYTHING NOT NEEDED IN CONTAINERS
+# -------------------------------------------
+
+# Git
+.git
+.gitignore
+
+# Docs
+docs/
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Tests (not needed in prod containers)
+**/tests/
+**/__pycache__/
+
+# Python cache
+*.pyc
+*.pyo
+.pytest_cache/
+.mypy_cache/
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# Coverage & reports
+.coverage
+htmlcov/
+coverage.xml
+
+# Logs & temp files
+*.log
+tmp/
+logs/
+
+# Repo-specific files
+docker-compose.yml
+docker-compose.override.yml
+
+# Root environment
+.env
+.env.*
+
+# BACKEND
+smart-spend-backend/.env
+smart-spend-backend/.env.*
+smart-spend-backend/.pytest_cache
+smart-spend-backend/.mypy_cache
+smart-spend-backend/.ruff_cache
+smart-spend-backend/*.csv
+smart-spend-backend/logs/
+smart-spend-backend/tmp/
+smart-spend-backend/alembic/versions/__pycache__
+
+# node/npm
+smart-spend-frontend/node_modules/
+smart-spend-backend/node_modules/
+
+# FRONTEND BUILD ARTIFACTS
+smart-spend-frontend/.next/
+smart-spend-frontend/dist/
+smart-spend-frontend/build/
+
+# IDE configs
+.vscode/
+.idea/

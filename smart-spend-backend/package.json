@@ -1,0 +1,10 @@
+{
+    "name": "smart-spend-backend-tests",
+    "version": "1.0.0",
+    "scripts": {
+      "test": "pytest -q",
+      "test:watch": "pytest -f",
+      "test:cov": "pytest --cov=app"
+    }
+  }
+  

@@ -1,0 +1,81 @@
+# -------------------------------------------
+# GLOBAL PYTHON IGNORE
+# -------------------------------------------
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# Byte-compiled / package caches
+.pytest_cache/
+pip-wheel-metadata/
+*.egg-info/
+*.egg
+dist/
+build/
+
+# -------------------------------------------
+# PROJECT-SPECIFIC IGNORE
+# -------------------------------------------
+
+# -------- BACKEND --------
+smart-spend-backend/.env
+smart-spend-backend/.env.*
+smart-spend-backend/.DS_Store
+smart-spend-backend/.coverage
+smart-spend-backend/.mypy_cache/
+smart-spend-backend/.ruff_cache/
+smart-spend-backend/.pytest_cache/
+smart-spend-backend/docs/_build/
+smart-spend-backend/alembic/versions/__pycache__
+
+# CSV uploads, logs & runtime files
+smart-spend-backend/*.csv
+smart-spend-backend/logs/
+smart-spend-backend/tmp/
+
+# Node/npm (backend includes package.json)
+smart-spend-backend/node_modules/
+
+# -------- FRONTEND --------
+smart-spend-frontend/node_modules/
+smart-spend-frontend/.env
+smart-spend-frontend/.env.*
+smart-spend-frontend/.next/
+smart-spend-frontend/.turbo/
+smart-spend-frontend/dist/
+smart-spend-frontend/build/
+
+# -------- REPO ROOT --------
+.env
+.env.*
+docker-compose.override.yml
+*.sqlite3
+*.db
+
+# Docs (requested to ignore)
+docs/
+
+# Local dev tools
+.DS_Store
+*.log
+
+# Testing outputs
+.coverage
+htmlcov/
+coverage.xml
+
+# IDE configs
+.vscode/
+.idea/
+*.code-workspace
+
+# Optional OS files
+Thumbs.db
