@@ -16,8 +16,6 @@
 - [Key Technologies & Design Decisions](#key-technologies--design-decisions)
 - [Architecture](#architecture)
 - [AI/ML Components](#aiml-components)
-- [Database Schema](#database-schema)
-- [API Endpoints](#api-endpoints)
 - [Setup](#setup)
 - [Usage](#usage)
 - [Testing](#testing)
@@ -85,7 +83,7 @@ Smart Spend separates **synchronous I/O-bound API handling** and **asynchronous 
 9. Client can poll job status via `/jobs/{job_id}`  
 
 ---
-
+```
 ## 🤖 AI/ML Components
 
 | Component                | Technology                     | Logic |
@@ -173,7 +171,7 @@ smart-spend/
 ├── README.md
 ├── git_branching_strategy.md
 └── test_trandactions.csv                      # Example csv file for testing (Optional)
-
+```
 ---
 
 ## 🚀 Setup (Docker Compose)
