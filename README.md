@@ -83,7 +83,7 @@ Smart Spend separates **synchronous I/O-bound API handling** and **asynchronous 
 9. Client can poll job status via `/jobs/{job_id}`  
 
 ---
-
+```
 ## 🤖 AI/ML Components
 
 | Component                | Technology                     | Logic |
