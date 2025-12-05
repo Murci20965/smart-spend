@@ -1,8 +1,10 @@
 # 1. Import FastAPI
 import logging
+from contextlib import asynccontextmanager
 
 from arq import create_pool
 from fastapi import Depends, FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -12,8 +14,6 @@ from app.routers.auth import router as auth_router
 from app.routers.jobs import router as jobs_router
 from app.routers.transactions import router as transactions_router
 from app.routers.upload import router as upload_router
-
-from contextlib import asynccontextmanager
 
 # Configure logging early
 configure_logging()
@@ -50,6 +50,24 @@ async def lifespan(app):
 
 
 app = FastAPI(lifespan=lifespan)
+
+# -----------------------------
+# CORS CONFIGURATION
+# -----------------------------
+# Define allowed origins for the frontend
+origins = [
+    "http://localhost",
+    "http://localhost:5173",  # React/Vite Frontend
+    "http://localhost:8000",  # Backend Docs
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 @app.get("/health")
