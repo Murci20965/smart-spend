@@ -93,7 +93,7 @@ Smart Spend separates **synchronous I/O-bound API handling** and **asynchronous 
 | PII Redaction Strategy   | Custom Python Logic/RegEx      | Sanitizes sensitive information via `sanitize_description()` |
 
 ---
-
+```
 smart-spend/
 ├── .github/
 │   └── woorkflows
