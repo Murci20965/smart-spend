@@ -45,11 +45,9 @@ docker-compose.override.yml
 
 # Root environment
 .env
-.env.*
 
 # BACKEND
 smart-spend-backend/.env
-smart-spend-backend/.env.*
 smart-spend-backend/.pytest_cache
 smart-spend-backend/.mypy_cache
 smart-spend-backend/.ruff_cache

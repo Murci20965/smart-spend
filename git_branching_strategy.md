@@ -120,6 +120,3 @@ git push origin v1.0.0
 - Clear path for features, fixes, and hotfixes.
 
 ---
-
-Next step: I can create a **ready-to-use GitHub Actions workflow** that enforces CI checks, linting, and testing automatically for this branching strategy.
-
