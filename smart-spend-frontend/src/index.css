@@ -1,0 +1,11 @@
+/* smart-spend-frontend/src/index.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base styles for the dark theme applied to the body */
+/* This ensures a default theme is present on load */
+.dark body {
+  background-color: #121212; /* Charcoal Black */
+  color: #FFFFFF;
+}

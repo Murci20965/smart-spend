@@ -1,3 +1,5 @@
+implementation_roadmap.md
+
 # -------------------------------------------
 # GLOBAL PYTHON IGNORE
 # -------------------------------------------
@@ -47,7 +49,6 @@ smart-spend-backend/node_modules/
 # -------- FRONTEND --------
 smart-spend-frontend/node_modules/
 smart-spend-frontend/.env
-smart-spend-frontend/.env.*
 smart-spend-frontend/.next/
 smart-spend-frontend/.turbo/
 smart-spend-frontend/dist/
@@ -55,7 +56,6 @@ smart-spend-frontend/build/
 
 # -------- REPO ROOT --------
 .env
-.env.*
 docker-compose.override.yml
 *.sqlite3
 *.db
