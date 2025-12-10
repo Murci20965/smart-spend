@@ -29,7 +29,7 @@
 
 ## 📖 Overview
 
-Smart Spend is a production-grade financial management application that processes bank statement CSVs, automatically categorizes transactions using AI, and provides actionable financial insights. The system uses a **two-tier categorization system** (rule-based + AI fallback), **learns from user corrections**, and offers **personalized financial coaching** powered by large language models.
+Smart Spend is a production-grade financial management application that processes bank statement CSVs, automatically categorizes transactions using AI, and provides actionable financial insights. The system uses a **two-tier categorization system** (rule-based + AI fallback), **learns from user corrections**, and offers **personalized financial coaching** powered by large language models from hugging face.
 
 ### Key Capabilities
 - 📄 **CSV Upload & Processing** – Flexible column mapping for various bank statement formats  
